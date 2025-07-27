@@ -20,7 +20,9 @@
 
     <properties>
         <java.version>11</java.version>
+
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+
     </properties>
 
     <dependencies>
@@ -46,6 +48,7 @@
             <artifactId>caffeine</artifactId>
         </dependency>
         <dependency>
+
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
@@ -81,6 +84,7 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.15</version>
         </dependency>
+
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -92,6 +96,7 @@
             <version>${mapstruct.version}</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -113,6 +118,7 @@
                 </configuration>
             </plugin>
             <plugin>
+
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
