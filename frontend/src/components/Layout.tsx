@@ -12,6 +12,9 @@ export default function Layout() {
           <Button color="inherit" component={Link} to="/">
             Home
           </Button>
+          <Button color="inherit" component={Link} to="/algorithm-builder">
+            Algorithm Builder
+          </Button>
         </Toolbar>
       </AppBar>
       <main>

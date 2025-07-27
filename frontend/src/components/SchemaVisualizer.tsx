@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import type { Schema, Table } from '../types/api';
+import type { Schema } from '../types/api';
 
 interface Props {
   schema: Schema;
@@ -29,6 +29,7 @@ export default function SchemaVisualizer({ schema, width = 800, height = 600 }: 
     const zoomBehavior = d3.zoom<SVGSVGElement, unknown>().on('zoom', (event) => {
       container.attr('transform', event.transform);
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     svg.call(zoomBehavior as any);
 
     const tableWidth = 150;
@@ -49,7 +50,7 @@ export default function SchemaVisualizer({ schema, width = 800, height = 600 }: 
         positions.set(d.name, { x, y, width: tableWidth, height });
         return `translate(${x},${y})`;
       })
-      .on('click', (event, d) => {
+      .on('click', (_event, d) => {
         setSelected((prev) => (prev === d.name ? null : d.name));
       });
 
