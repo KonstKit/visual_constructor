@@ -20,7 +20,8 @@ describe('collection_filter generator', () => {
     const cond = workspace.newBlock('logic_boolean')
     cond.setFieldValue('TRUE', 'BOOL')
     block.getInput('CONDITION')!.connection!.connect(cond.outputConnection!)
-    block.setFieldValue('x', 'VAR')
+    const xVar = workspace.createVariable('x')
+    block.setFieldValue(xVar.getId(), 'VAR')
 
     const code = javascriptGenerator.blockToCode(block) as [string, number]
     expect(code[0]).toMatch(/arr\.filter\(\(.+\) => true\)/)
@@ -37,7 +38,8 @@ describe('collection_map generator', () => {
     const num = workspace.newBlock('math_number')
     num.setFieldValue('2', 'NUM')
     block.getInput('TRANSFORM')!.connection!.connect(num.outputConnection!)
-    block.setFieldValue('i', 'VAR')
+    const iVar = workspace.createVariable('i')
+    block.setFieldValue(iVar.getId(), 'VAR')
 
     const code = javascriptGenerator.blockToCode(block) as [string, number]
     expect(code[0]).toMatch(/arr\.map\(\(.+\) => 2\)/)
