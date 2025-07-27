@@ -85,6 +85,15 @@ export const basicToolbox: ToolboxDefinition = {
     },
     {
       kind: 'category',
+      name: 'База данных',
+      colour: '#A6745C',
+      contents: [
+        { kind: 'block', type: 'db_query' },
+        { kind: 'block', type: 'db_get_field' },
+      ],
+    },
+    {
+      kind: 'category',
       name: 'Variables',
       colour: '#A65C81',
       custom: 'VARIABLE',

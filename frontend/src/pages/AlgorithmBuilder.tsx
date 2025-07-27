@@ -3,6 +3,7 @@ import { Button, Stack } from '@mui/material'
 import BlocklyWorkspace from '../components/BlocklyWorkspace'
 import type { BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
 import { basicToolbox } from '../blockly/basicToolbox'
+import '../customBlocks/databaseBlocks'
 
 export default function AlgorithmBuilder() {
   const workspaceRef = useRef<BlocklyWorkspaceHandle>(null)
