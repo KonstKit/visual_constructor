@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: data-flow-builder
+server:
+  port: 8080
