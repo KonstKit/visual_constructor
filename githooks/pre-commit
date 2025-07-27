@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+REMOTE="origin"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+git fetch "$REMOTE" "$BRANCH"
+if ! git merge-base --is-ancestor "$REMOTE/$BRANCH" "$BRANCH"; then
+  echo "⚠️  Ветка $BRANCH позади $REMOTE/$BRANCH. Сначала git pull --rebase."
+  exit 1
+fi
