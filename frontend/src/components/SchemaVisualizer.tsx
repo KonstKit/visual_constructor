@@ -6,6 +6,7 @@ interface Props {
   schema: Schema;
   width?: number;
   height?: number;
+  onTableSelect?: (table: string) => void;
 }
 
 type TablePosition = {
@@ -15,7 +16,7 @@ type TablePosition = {
   height: number;
 };
 
-export default function SchemaVisualizer({ schema, width = 800, height = 600 }: Props) {
+export default function SchemaVisualizer({ schema, width = 800, height = 600, onTableSelect }: Props) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const minimapRef = useRef<SVGSVGElement | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
@@ -62,8 +63,13 @@ export default function SchemaVisualizer({ schema, width = 800, height = 600 }: 
         positions.set(d.name, { x, y, width: tableWidth, height });
         return `translate(${x},${y})`;
       })
+      .attr('draggable', true)
+      .on('dragstart', (event, d) => {
+        event.dataTransfer?.setData('text/plain', d.name);
+      })
       .on('click', (_event, d) => {
         setSelected((prev) => (prev === d.name ? null : d.name));
+        onTableSelect?.(d.name);
       })
       .on('dblclick', (_event, d) => {
         setCollapsed((prev) => {
@@ -254,7 +260,7 @@ export default function SchemaVisualizer({ schema, width = 800, height = 600 }: 
         >
           <li
             onClick={() => {
-              console.log('Add to algorithm', contextMenu.table);
+              onTableSelect?.(contextMenu.table);
               setContextMenu(null);
             }}
           >

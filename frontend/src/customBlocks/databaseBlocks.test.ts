@@ -1,13 +1,25 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import * as Blockly from 'blockly/node'
 import { javascriptGenerator } from 'blockly/javascript'
+import { setSchema } from './databaseBlocks'
 import './databaseBlocks'
+import type { Schema } from '../types/api'
+
+const schema: Schema = {
+  tables: [
+    { name: 'users', columns: [
+        { name: 'id', dataType: 'int', nullable: false, primaryKey: true },
+        { name: 'name', dataType: 'varchar', nullable: false, primaryKey: false }
+      ], foreignKeys: [] },
+  ],
+}
 
 let workspace: Blockly.Workspace
 
 beforeEach(() => {
   workspace = new Blockly.Workspace()
   javascriptGenerator.init(workspace)
+  setSchema(schema)
 })
 
 describe('db_query generator', () => {
@@ -30,9 +42,8 @@ describe('db_get_field generator', () => {
     const varModel = workspace.createVariable('row')
     rec.setFieldValue(varModel.getId(), 'VAR')
     block.getInput('RECORD')!.connection!.connect(rec.outputConnection!)
-    block.setFieldValue('name', 'FIELD')
 
     const code = javascriptGenerator.blockToCode(block) as [string, number]
-    expect(code[0]).toBe("row['name']")
+    expect(code[0]).toBe("row['field']")
   })
 })
