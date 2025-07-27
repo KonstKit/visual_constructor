@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './index.css'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
+import AlgorithmBuilder from './pages/AlgorithmBuilder'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="algorithm-builder" element={<AlgorithmBuilder />} />
         </Route>
       </Routes>
     </BrowserRouter>

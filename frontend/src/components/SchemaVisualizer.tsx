@@ -31,12 +31,10 @@ export default function SchemaVisualizer({ schema, width = 800, height = 600 }: 
 
     const container = svg.append('g').attr('class', 'container');
 
-    const zoomBehavior = d3
-      .zoom<SVGSVGElement, unknown>()
-      .on('zoom', (event) => {
-        container.attr('transform', event.transform.toString());
-        setTransform(event.transform);
-      });
+    const zoomBehavior = d3.zoom<SVGSVGElement, unknown>().on('zoom', (event) => {
+      container.attr('transform', event.transform);
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     svg.call(zoomBehavior as any);
     svg.call(zoomBehavior.transform, transform);
 
