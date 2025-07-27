@@ -8,6 +8,14 @@ export interface Column {
 export interface Table {
   name: string;
   columns: Column[];
+  foreignKeys?: ForeignKey[];
+}
+
+export interface ForeignKey {
+  columnName: string;
+  referencedTable: string;
+  referencedColumn: string;
+
 }
 
 export interface Schema {
