@@ -15,6 +15,7 @@ export interface ForeignKey {
   columnName: string;
   referencedTable: string;
   referencedColumn: string;
+
 }
 
 export interface Schema {
