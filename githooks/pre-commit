@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REMOTE="origin"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+# 1. Подтягиваем свежий REMOTE/BRANCH
+git fetch "$REMOTE" "$BRANCH"
+
+# 2. Если HEAD отстаёт, пробуем обновить ветку автоматически
+if ! git merge-base --is-ancestor "$REMOTE/$BRANCH" "$BRANCH"; then
+  echo "ℹ️  Ветка $BRANCH позади $REMOTE/$BRANCH. Пытаюсь git pull --rebase --autostash ..."
+  if git pull --rebase --autostash "$REMOTE" "$BRANCH"; then
+    echo "✅  Успешно обновлено до $(git rev-parse --short HEAD)"
+  else
+    echo "❌  Конфликты при ребейзе. Разрешите их, затем:"
+    echo "   git add <исправленные_файлы> && git rebase --continue"
+    echo "ИЛИ git rebase --abort  (и повторите commit позже)."
+    exit 1
+  fi
+fi
+
+# 3. Проверка на non‑ASCII и пробелы (оставляю пример Git’а — при желании уберите)
+against=${REMOTE}/${BRANCH}
+exec git diff-index --check --cached "$against" --
