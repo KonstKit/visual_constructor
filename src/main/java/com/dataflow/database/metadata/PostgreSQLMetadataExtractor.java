@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.*;
 
 @Component
-
 public class PostgreSQLMetadataExtractor implements DatabaseMetadataExtractor {
 
     @Override

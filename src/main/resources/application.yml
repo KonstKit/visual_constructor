@@ -1,19 +1,15 @@
 spring:
   application:
     name: data-flow-builder
-
   cache:
     type: caffeine
     caffeine:
       spec: expireAfterWrite=5m
-
 server:
   port: 8080
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-
-
 ---
 spring:
   config:
