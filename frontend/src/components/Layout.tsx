@@ -15,6 +15,9 @@ export default function Layout() {
           <Button color="inherit" component={Link} to="/algorithm-builder">
             Algorithm Builder
           </Button>
+          <Button color="inherit" component={Link} to="/regex-builder">
+            Regex Builder
+          </Button>
         </Toolbar>
       </AppBar>
       <main>
