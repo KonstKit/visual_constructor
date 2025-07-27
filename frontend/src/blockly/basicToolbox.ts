@@ -85,6 +85,17 @@ export const basicToolbox: ToolboxDefinition = {
     },
     {
       kind: 'category',
+      name: 'Collections',
+      colour: '#5CA699',
+      contents: [
+        { kind: 'block', type: 'collection_filter' },
+        { kind: 'block', type: 'collection_map' },
+        { kind: 'block', type: 'collection_reduce' },
+        { kind: 'block', type: 'collection_sort' },
+      ],
+    },
+    {
+      kind: 'category',
       name: 'База данных',
       colour: '#A6745C',
       contents: [
