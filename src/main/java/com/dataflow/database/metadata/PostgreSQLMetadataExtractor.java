@@ -4,7 +4,6 @@ import com.dataflow.database.ConnectionConfig;
 import com.dataflow.database.util.JdbcUtils;
 import org.springframework.stereotype.Component;
 
-
 import java.sql.*;
 import java.util.*;
 

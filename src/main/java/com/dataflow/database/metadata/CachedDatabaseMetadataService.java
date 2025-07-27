@@ -21,8 +21,15 @@ public class CachedDatabaseMetadataService {
     @Cacheable(value = "dbSchemas", key = "T(java.util.Objects).hash(#config.databaseType, #config.url, #config.username)")
     public DatabaseSchema extractSchema(ConnectionConfig config) throws SQLException {
         DatabaseMetadataExtractor extractor = factory.getExtractor(config.getDatabaseType());
-        try (Connection conn = DriverManager.getConnection(config.getUrl(), config.getUsername(), config.getPassword())) {
+        try (Connection conn = openConnection(config)) {
             return extractor.extractSchema(conn);
         }
+    }
+
+    private Connection openConnection(ConnectionConfig config) throws SQLException {
+        if (config.getUsername() == null || config.getUsername().isEmpty()) {
+            return DriverManager.getConnection(config.getUrl());
+        }
+        return DriverManager.getConnection(config.getUrl(), config.getUsername(), config.getPassword());
     }
 }
