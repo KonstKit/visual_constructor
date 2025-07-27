@@ -1,5 +1,6 @@
 import * as Blockly from 'blockly/core'
 import { javascriptGenerator } from 'blockly/javascript'
+import { TYPE_COLORS } from './collectionBlocks'
 
 const TABLES = ['users', 'orders']
 
@@ -14,7 +15,7 @@ export function registerDatabaseBlocks() {
         .setCheck('String')
         .appendField('where')
       this.setOutput(true, 'Array')
-      this.setColour(230)
+      this.setColour(TYPE_COLORS.Array)
       this.setTooltip('Query table')
     },
   }
@@ -27,7 +28,7 @@ export function registerDatabaseBlocks() {
         .appendField('.')
         .appendField(new Blockly.FieldTextInput('field'), 'FIELD')
       this.setOutput(true)
-      this.setColour(230)
+      this.setColour(TYPE_COLORS.Object)
       this.setTooltip('Get field from record')
     },
   }

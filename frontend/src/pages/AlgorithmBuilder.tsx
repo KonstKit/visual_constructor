@@ -4,6 +4,8 @@ import BlocklyWorkspace from '../components/BlocklyWorkspace'
 import type { BlocklyWorkspaceHandle } from '../components/BlocklyWorkspace'
 import { basicToolbox } from '../blockly/basicToolbox'
 import '../customBlocks/databaseBlocks'
+import '../customBlocks/collectionBlocks'
+import { collectionDemoXml } from '../blockly/demo/collectionDemo'
 
 export default function AlgorithmBuilder() {
   const workspaceRef = useRef<BlocklyWorkspaceHandle>(null)
@@ -48,6 +50,7 @@ export default function AlgorithmBuilder() {
       <BlocklyWorkspace
         ref={workspaceRef}
         toolbox={basicToolbox}
+        initialXml={collectionDemoXml}
         className="blockly-container"
       />
    </div>
